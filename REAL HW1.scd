@@ -10,8 +10,6 @@
 
 	sig2 = ({ VarSaw.ar(LFPulse.kr(3, 0, 0.3, 200, 200), 0, 0.2, 0.1) });
 
-	env = Env.new ([1.0, 0.5, 1.0, 0],
-		times: [ 1, 0, 0.5, 1, 0,]);
 
 	Out.ar(0, [sig1, sig2] );
 

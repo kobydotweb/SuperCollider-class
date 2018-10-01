@@ -1,0 +1,34 @@
+({
+	var sig, noteEnv;
+
+	noteEnv = Env.new(
+		[60, 60, 0, 0, 60, 60, 0, 0, 67, 67, 0, 0, 67, 67, 0, 0],
+		[  3, 0, 1, 0, 3, 0, 1, 0, 3, 0, 1, 0, 3, 0, 1]*0.2
+	);
+
+	noteEnv = EnvGen.kr( noteEnv );
+
+	sig = SinOsc.ar ( noteEnv.midicps, mul:0.7);
+
+	Out.ar(0, sig!2);
+
+}.play;)
+
+({
+	arg gateVal = 1;
+	var sig, env;
+
+	env = Env.new(
+		[0, 1, 0.3, 0.7, 0],
+		[0.3, 0.01, 0.5, 0.5],
+		curve: [4,-4,4,-,4],
+		releaseNose: 2
+	);
+
+	env = EnvGen.kr (env, gate: MouseX.kr(-,1,1));
+
+	sig - LFTri.ar(60.midicps, mul: env * 0.7 );
+
+	Out.ar(0, sig!2);
+
+}.play;)
